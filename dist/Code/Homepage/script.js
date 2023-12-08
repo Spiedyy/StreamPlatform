@@ -1,9 +1,13 @@
 let FetchedVideos = [];
 let i = 0;
 
-const videoContainer = document.getElementById('cardcontainer');
+const cardcontainer = document.getElementById('cardcontainer');
 const cardtoclone = document.getElementById('card');
-
+const videoContainer = document.getElementById('videocontainer');
+const episodegrid = document.getElementById('episodegrid');
+const videosrc = document.getElementById('videossrc');
+const titles = document.getElementById('titles');
+const videocard = document.getElementById('videocard');
 
 function getvideos() {
     fetch('../Videos.json')
@@ -26,17 +30,23 @@ function clonecard() {
         const clone = cardtoclone.cloneNode(true);
         clone.id = `card${i}`;
         clone.querySelector('#title').innerHTML = anime;
+        clone.querySelector('#cardbtn').id = `cardbtn${i}`;
         clone.classList.remove('hidden');
-        videoContainer.appendChild(clone);
+        cardcontainer.appendChild(clone);
+
+        // Create the media player for each anime
+        clone.querySelector(`#cardbtn${i}`).addEventListener('click', () => {
+            videoContainer.classList.remove('hidden');
+            createMediaPlayer(anime);
+        });
+
+        videocard.remove();
+        titles.remove();
 
         i++
 
-
+        // Data for the card
         FetchedVideos.Animes[anime].forEach(video => {
-            console.log(video.Name) // Logs the Name of all the episode
-            console.log(video.img); // Logs the image of all the episode
-            console.log(video.type); // Logs the type of all the episode
-
             clone.querySelector('#title').innerHTML = anime;
             clone.querySelector('#imgsrc').src = video.img;
             clone.querySelector('#type').innerHTML = video.type;
@@ -44,4 +54,26 @@ function clonecard() {
     }
 
     cardtoclone.remove();
+}
+
+// Creating the media player for each anime
+function createMediaPlayer(anime) {
+    const vidcontainer = videocard.cloneNode(true);
+    vidcontainer.classList.remove('hidden');
+    vidcontainer.querySelector('#videossrc').src = FetchedVideos.Animes[anime][0].source;
+    videoContainer.appendChild(vidcontainer);
+
+    const closevideo = document.getElementById('closevideo');
+    closevideo.addEventListener('click', () => {
+        videoContainer.classList.add('hidden');
+        vidcontainer.remove();
+    });
+
+    const fetchepisodes = FetchedVideos.Animes[anime];
+    fetchepisodes.forEach(episode => {
+        const title = titles.cloneNode(true);
+        title.querySelector('#title').innerHTML = episode.Name;
+        document.getElementById('episodegrid').appendChild(title);
+    });
+
 }

@@ -82,23 +82,48 @@
         </div>
     </nav>
 
-    <div id="cardcontainer" class="grid grid-cols-6 gap-12 p-12 max-w-8xl">
-        <a id="card" class="hidden" href="">
-            <button id="cardbtn">
-                <div class="">
-                    <img id="imgsrc" class="rounded-t" src="" alt="???">
-                    <div class="bg-gray-800 rounded-b">
-                        <h2 id="type" class="flex justify-end p-2 text-md">???</h2>
-                    </div>
-                    <div>
-                        <h1 id="title" class="flex justify-start text-lgl"></h1>
+    <div class="relative">
+        <div id="videocontainer" class="absolute px-52 py-16 rounded hidden">
+            <div id="videocard">
+                <div class="flex justify-end">
+                    <button id="closevideo" class="bg-red-500 rounded-sm w-12 flex justify-center">
+                        Close
+                    </button>
+                </div>
+                <div class="border border-gray-600 rounded">
+                    <video controls class="rounded">
+                        <source id="videossrc" src="???">
+                    </video>
+                    <div id="episodegrid" class="grid grid-cols-5 gap-2 p-2 border-t border-gray-600">
+                            <button id="titles">
+                                <h1 id="title" class="flex justify-center text-lgl bg-gray-800 rounded-lg p-2">???</h1>
+                            </button>
                     </div>
                 </div>
-            </button>
-        </a>
+            </div>
+        </div>
+
+
+
+
+        <div id="cardcontainer" class="grid grid-cols-6 gap-12 p-12 max-w-8xl">
+            <div id="card" class="hidden" href="">
+                <button id="cardbtn">
+                    <div class="">
+                        <img id="imgsrc" class="rounded-t" src="" alt="???">
+                        <div class="bg-gray-800 rounded-b">
+                            <h2 id="type" class="flex justify-end p-2 text-md">???</h2>
+                        </div>
+                        <div>
+                            <h1 id="title" class="flex justify-start text-lgl"></h1>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>
