@@ -65,8 +65,23 @@ function createMediaPlayer(anime) {
 
     const closevideo = document.getElementById('closevideo');
     closevideo.addEventListener('click', () => {
-        videoContainer.classList.add('hidden');
         vidcontainer.remove();
+    });
+
+    // escape key closes the video
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            vidcontainer.remove();
+        }
+    });
+
+    const video = document.getElementById('video');
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+            video.pause();
+        } else {
+            video.play();
+        }
     });
 
     const fetchepisodes = FetchedVideos.Animes[anime];
@@ -74,6 +89,11 @@ function createMediaPlayer(anime) {
         const title = titles.cloneNode(true);
         title.querySelector('#title').innerHTML = episode.Name;
         document.getElementById('episodegrid').appendChild(title);
+        // change the src of the video with the episode
+        title.addEventListener('click', () => {
+            vidcontainer.querySelector('#videossrc').src = episode.source;
+            video.load();
+        });
     });
 
 }
