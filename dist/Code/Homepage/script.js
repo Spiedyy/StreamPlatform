@@ -64,18 +64,21 @@ function createMediaPlayer(anime) {
     videoContainer.appendChild(vidcontainer);
 
     const closevideo = document.getElementById('closevideo');
+    const video = document.getElementById('video');
     closevideo.addEventListener('click', () => {
         vidcontainer.remove();
+        // stop the video when the video is closed
+        video.src = '';
     });
 
     // escape key closes the video
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             vidcontainer.remove();
+            video.src = '';
         }
     });
 
-    const video = document.getElementById('video');
     document.addEventListener('visibilitychange', () => {
         if (document.visibilityState === 'hidden') {
             video.pause();
