@@ -24,7 +24,6 @@ getvideos();
 function clonecard() {
 
     for (const anime in FetchedVideos.Animes) {
-        console.log(anime); // Logs the name of the anime
 
         // Create a card for each title
         const clone = cardtoclone.cloneNode(true);
